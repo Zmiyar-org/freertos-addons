@@ -209,7 +209,7 @@ bool BinaryQueue::Enqueue(void *item)
 }
 
 
-bool BinaryQueue::EnqueueFromISR(void *item, BaseType_t *pxHigherPriorityTaskWoken)
+bool BinaryQueue::EnqueueFromISR(const void *item, BaseType_t *pxHigherPriorityTaskWoken)
 {
     (void)xQueueOverwriteFromISR(handle, item, pxHigherPriorityTaskWoken);
     return true;

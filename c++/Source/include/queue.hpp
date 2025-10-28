@@ -346,7 +346,7 @@ class BinaryQueue : public Queue {
           *         rescheduling event.
           *  @return true always, because of overwrite.
           */
-        virtual bool EnqueueFromISR(void *item, BaseType_t *pxHigherPriorityTaskWoken);
+        virtual bool EnqueueFromISR(const void *item, BaseType_t *pxHigherPriorityTaskWoken) override;
 };
 
 
