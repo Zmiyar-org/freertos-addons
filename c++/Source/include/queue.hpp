@@ -129,14 +129,21 @@ class Queue {
          *  @throws QueueCreateException
          *  @param maxItems Maximum number of items this queue can hold.
          *  @param itemSize Size of an item in a queue.
+         *  @param name Optional name used for Queue Registry (copied as const char *).
          *  @note FreeRTOS queues use a memcpy / fixed size scheme for queues.
          */
-        Queue(UBaseType_t maxItems, UBaseType_t itemSize);
+        Queue(UBaseType_t maxItems, UBaseType_t itemSize, const char *name = nullptr);
 
         /**
          *  Our destructor.
          */
         virtual ~Queue();
+
+        /**
+         *  Get the name of the queue.
+         *  @return The name of the queue.
+         */
+        const char* GetName() const;
 
         /**
          *  Add an item to the back of the queue.

@@ -41,14 +41,18 @@
 
 
 #include "queue.hpp"
+#include <cstddef>
 
 
 using namespace cpp_freertos;
 
 
-Queue::Queue(UBaseType_t maxItems, UBaseType_t itemSize)
+Queue::Queue(UBaseType_t maxItems, UBaseType_t itemSize, const char *name)
 {
     handle = xQueueCreate(maxItems, itemSize);
+    if (name != nullptr) {
+        vQueueAddToRegistry(handle, name);
+    }
 
     if (handle == NULL) {
 #ifndef CPP_FREERTOS_NO_EXCEPTIONS
@@ -63,6 +67,12 @@ Queue::Queue(UBaseType_t maxItems, UBaseType_t itemSize)
 Queue::~Queue()
 {
     vQueueDelete(handle);
+}
+
+
+const char* Queue::GetName() const
+{
+    return pcQueueGetName(handle);
 }
 
 
